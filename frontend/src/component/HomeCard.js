@@ -25,7 +25,7 @@ const HomeCard = ({ name, image, category, price, loading,id }) => {
           <p>{loading}</p>
         </div>
       )}
-    </div>
+    </div> 
   );
 };
 

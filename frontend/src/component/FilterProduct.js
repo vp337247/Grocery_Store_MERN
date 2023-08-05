@@ -12,4 +12,4 @@ const FilterProduct = ({category,onClick,isActive}) => {
   );
 };
 
-export default FilterProduct;
+export default FilterProduct; 

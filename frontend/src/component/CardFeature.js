@@ -11,7 +11,7 @@ const CardFeature = ({ image, name, price, category, loading, id }) => {
       _id : id,
       name : name,
       price : price,
-      category : category,
+      category : category, 
       image : image
     }))
   };
