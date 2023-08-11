@@ -10,8 +10,11 @@ const Menu = () => {
   const dispatch = useDispatch()
   const productData = useSelector((state) => state.product.productList);
 
-  const productDisplay = productData.filter((el) => el._id === filterby)[0];
+  const productDisplay = productData.find((el) => el._id === filterby);
 
+if (!productDisplay) {
+  return <p>Product not found.</p>; // You can provide a proper error message or UI here
+}
   const handleAddCartProduct = (e) => {
     dispatch(addCartItem(productDisplay))
   };
@@ -20,6 +23,7 @@ const Menu = () => {
     dispatch(addCartItem(productDisplay))
       navigate("/cart")
   }
+  //console.log(productDisplay);
   return (
     <div className="p-2 md:p-4">
       <div className="w-full max-w-4xl m-auto md:flex bg-white">
@@ -40,7 +44,7 @@ const Menu = () => {
           </p>
           <div className="flex gap-3">
           <button onClick={handleBuy} className="bg-yellow-500 py-1 mt-2 rounded hover:bg-yellow-600 min-w-[100px]">Buy</button>
-          <button onClick={handleAddCartProduct} className="bg-yellow-500 py-1 mt-2 rounded hover:bg-yellow-600 min-w-[100px]">Add Cart</button>
+          <button onClick={handleAddCartProduct} className="bg-yellow-500 py-1 mt-2 rounded hover:bg-yellow-600 min-w-[100px]">Add To Cart</button>
           </div>
           <div>
             <p className="text-slate-600 font-medium">Description : </p>

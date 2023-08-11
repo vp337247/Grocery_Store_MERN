@@ -89,7 +89,7 @@ const Newproduct = () => {
           <option value={"rice"}>rice</option>
           <option value={"cake"}>Cake</option>
           <option value={"burger"}>Burger</option>
-          <option value={"panner"}>Panner</option>
+          <option value={"paneer"}>Paneer</option>
           <option value={"sandwich"}>Sandwich</option>
         </select>
 

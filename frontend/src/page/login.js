@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import loginSignupImage from "../assest/login-animation.gif";
+import loginSignupImage from "../assets/login-animation.gif";
 import { BiShow, BiHide } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { BsEmojiSmileUpsideDown } from "react-icons/bs";
@@ -17,7 +17,6 @@ const Login = () => {
   });
   const navigate = useNavigate()  
   const userData = useSelector(state => state)
-
 
   const dispatch = useDispatch()
 

@@ -8,10 +8,10 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 6003;
 const url =process.env.MONGODB_URL;
 // MongoDB connection
-mongoose.set("strictQuery", false);
+mongoose.set("strictQuery", false); 
 mongoose
   .connect(url,{ useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected to Database"))
