@@ -12,7 +12,7 @@ router.post("/create-checkout-session", async (req, res) => {
             mode : "payment",
             payment_method_types : ['card'],
             billing_address_collection : "auto",
-            shipping_options : [{shipping_rate : "shr_1N0qDnSAq8kJSdzMvlVkJdua"}],
+            shipping_options : [{shipping_rate : "shr_1NeAksSJUBUBQNAijtjaPAS9"}],
             line_items : req.body.map((item)=>{
                 return{
                   price_data : {

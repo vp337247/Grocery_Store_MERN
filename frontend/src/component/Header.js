@@ -92,12 +92,6 @@ const Header = () => {
                   >
                     Menu
                   </Link>
-                  <Link to={"about"} className="px-2 py-1">
-                    About
-                  </Link>
-                  <Link to={"contact"} className="px-2 py-1">
-                    Contact
-                  </Link>
                 </nav>
               </div>
             )}

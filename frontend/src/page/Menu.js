@@ -13,7 +13,7 @@ const Menu = () => {
   const productDisplay = productData.find((el) => el._id === filterby);
 
 if (!productDisplay) {
-  return <p>Product not found.</p>; // You can provide a proper error message or UI here
+  return <p>Product not found.</p>; 
 }
   const handleAddCartProduct = (e) => {
     dispatch(addCartItem(productDisplay))
@@ -53,7 +53,7 @@ if (!productDisplay) {
         </div>
       </div>
 
-      <AllProduct heading={"Related Product"}/>
+      <AllProduct heading={"Related Products"}/>
     </div>
   );
 };
