@@ -39,7 +39,7 @@ const Cart = () => {
           const data = await res.json()
           console.log(data)
 
-          toast("Redirect to payment Gateway...!")
+          toast("Redirecting to Payment Gateway...!")
           stripePromise.redirectToCheckout({sessionId : data})
       }
       else{

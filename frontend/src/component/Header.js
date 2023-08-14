@@ -17,7 +17,7 @@ const Header = () => {
   };
   const handleLogout = () => {
     dispatch(logoutRedux());
-    toast("Logout successfully");
+    toast("Successfully Logged Out");
   };
 
   const cartItemNumber = useSelector((state) => state.product.cartItem)

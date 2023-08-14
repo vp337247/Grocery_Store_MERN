@@ -52,7 +52,7 @@ const Login = () => {
       const dataRes = await fetchData.json()
       console.log(dataRes)
       
-      toast(dataRes.message)
+      
       
       if(dataRes.alert){
         dispatch(loginRedux(dataRes))
@@ -64,7 +64,7 @@ const Login = () => {
       console.log(userData)
     }
     else{
-        alert("Please Enter required fields")
+        alert("Please Enter Required Fields")
     }
   }
 

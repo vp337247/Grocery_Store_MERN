@@ -64,19 +64,21 @@ console.log(process.env.REACT_APP_SERVER_DOMAIN)
           })
 
           const dataRes = await fetchData.json()
+
+
     
 
         // alert(dataRes.message);
-        toast(dataRes.message)
+        toast("Thanks for Signing Up")
         if(dataRes.alert){
           navigate("/login");
         }
        
       } else {
-        alert("password and confirm password not equal");
+        alert("Passwords Do Not Match");
       }
     } else {
-      alert("Please Enter required fields");
+      alert("Please Enter Required Fields");
     }
   };
 
