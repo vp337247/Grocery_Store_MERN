@@ -1,7 +1,9 @@
+// routes/user.js
 const express = require("express");
 const router = express.Router();
 const userModel = require("../models/user");
 
+// User signup route
 router.post("/signup", async (req, res) => {
   const { email } = req.body;
 
@@ -16,6 +18,7 @@ router.post("/signup", async (req, res) => {
   });
 });
 
+// User login route
 router.post("/login", (req, res) => {
   const { email } = req.body;
   userModel.findOne({ email: email }, (err, result) => {

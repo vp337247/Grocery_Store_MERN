@@ -1,16 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CartProduct from "../component/cartProduct";
-import emptyCartImage from "../assets/empty.gif"
+import emptyCartImage from "../assets/empty.gif";
 import { toast } from "react-hot-toast";
-import {loadStripe} from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const productCartItem = useSelector((state) => state.product.cartItem);
-  const user = useSelector(state => state.user)
-  const navigate = useNavigate()
+  const user = useSelector(state => state.user);
+  const navigate = useNavigate();
 
+  // Calculate total price and quantity for all cart items
   const totalPrice = productCartItem.reduce(
     (acc, curr) => acc + parseInt(curr.total),
     0
@@ -20,48 +21,42 @@ const Cart = () => {
     0
   );
 
-  
-  const handlePayment = async()=>{
+  // Handle payment process
+  const handlePayment = async () => {
+    if (user.email) {
+      const stripePromise = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+      const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}create-checkout-session`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify(productCartItem)
+      });
 
-      if(user.email){
-          
-          const stripePromise = await loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
-          const res = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}create-checkout-session`,{
-            method : "POST",
-            headers  : {
-              "content-type" : "application/json"
-            },
-            body  : JSON.stringify(productCartItem)
-          })
-          console.log(res);
-          if(res.statusCode === 500) return;
+      if (res.status === 500) return;
 
-          const data = await res.json()
-          console.log(data)
+      const data = await res.json();
 
-          toast("Redirecting to Payment Gateway...!")
-          stripePromise.redirectToCheckout({sessionId : data})
-      }
-      else{
-        toast("Please Login!")
-        setTimeout(()=>{
-          navigate("/login")
-        },1000)
-      }
-    
-  }
+      toast("Redirecting to Payment Gateway...!");
+      stripePromise.redirectToCheckout({ sessionId: data });
+    } else {
+      toast("Please Login!");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    }
+  };
+
   return (
-    <>
-    
-      <div className="p-2 md:p-4">
-        <h2 className="text-lg md:text-2xl font-bold text-slate-600">
-          Your Cart Items
-        </h2>
+    <div className="p-2 md:p-4">
+      <h2 className="text-lg md:text-2xl font-bold text-slate-600">
+        Your Cart Items
+      </h2>
 
-        {productCartItem[0] ?
+      {productCartItem[0] ? (
+        // Display cart items
         <div className="my-4 flex gap-3">
-          {/* display cart items  */}
-          <div className="w-full max-w-3xl ">
+          <div className="w-full max-w-3xl">
             {productCartItem.map((el) => {
               return (
                 <CartProduct
@@ -77,8 +72,7 @@ const Cart = () => {
               );
             })}
           </div>
-
-          {/* total cart item  */}
+          {/* Total cart item */}
           <div className="w-full max-w-md  ml-auto">
             <h2 className="bg-blue-500 text-white p-2 text-lg">Summary</h2>
             <div className="flex w-full py-2 text-lg border-b">
@@ -96,18 +90,14 @@ const Cart = () => {
             </button>
           </div>
         </div>
-
-        : 
-        <>
-          <div className="flex w-full justify-center items-center flex-col">
-            <img src={emptyCartImage} className="w-full max-w-sm"/>
-            <p className="text-slate-500 text-3xl font-bold">Empty Cart</p>
-          </div>
-        </>
-      }
-      </div>
-    
-    </>
+      ) : (
+        // Show empty cart message
+        <div className="flex w-full justify-center items-center flex-col">
+          <img src={emptyCartImage} className="w-full max-w-sm" alt="Empty Cart" />
+          <p className="text-slate-500 text-3xl font-bold">Empty Cart</p>
+        </div>
+      )}
+    </div>
   );
 };
 

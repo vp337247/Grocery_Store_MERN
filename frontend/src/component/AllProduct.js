@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import CardFeature from "./CardFeature";
+import CardFeature from "./CardFeature"; 
 import FilterProduct from "./FilterProduct";
 
 const AllProduct = ({ heading }) => {
+  // Get product data from Redux store
   const productData = useSelector((state) => state.product.productList);
+  
+  // Create a list of unique categories from the product data
   const categoryList = [...new Set(productData.map((el) => el.category))];
 
-  //filter data display
+  // State to manage filtered data
   const [filterby, setFilterBy] = useState("");
   const [dataFilter, setDataFilter] = useState([]);
 
@@ -15,8 +18,9 @@ const AllProduct = ({ heading }) => {
     setDataFilter(productData);
   }, [productData]);
 
+  // Function to handle filtering products by category
   const handleFilterProduct = (category) => {
-    setFilterBy(category)
+    setFilterBy(category);
     const filter = productData.filter(
       (el) => el.category.toLowerCase() === category.toLowerCase()
     );
@@ -25,6 +29,7 @@ const AllProduct = ({ heading }) => {
     });
   };
 
+  // Create an array for loading placeholders
   const loadingArrayFeature = new Array(10).fill(null);
 
   return (
@@ -33,6 +38,7 @@ const AllProduct = ({ heading }) => {
 
       <div className="flex gap-4 justify-center overflow-scroll scrollbar-none">
         {categoryList[0] ? (
+          // Render FilterProduct components for each category
           categoryList.map((el) => {
             return (
               <FilterProduct
@@ -44,6 +50,7 @@ const AllProduct = ({ heading }) => {
             );
           })
         ) : (
+          // Show loading message if categoryList is empty
           <div className="min-h-[150px] flex justify-center items-center">
             <p>Loading...</p>
           </div>
@@ -51,23 +58,26 @@ const AllProduct = ({ heading }) => {
       </div>
 
       <div className="flex flex-wrap justify-center gap-4 my-4">
-        {dataFilter[0]
-          ? dataFilter.map((el) => {
-              return (
-                <CardFeature
-                  key={el._id}
-                  id={el._id}
-                  image={el.image}
-                  name={el.name}
-                  category={el.category}
-                  price={el.price}
-                />
-              );
-            })
-          : 
-          loadingArrayFeature.map((el,index) => (
-              <CardFeature loading="Loading..." key={index+"allProduct"} />
-            ))}
+        {dataFilter[0] ? (
+          // Render CardFeature components for each product in dataFilter
+          dataFilter.map((el) => {
+            return (
+              <CardFeature
+                key={el._id}
+                id={el._id}
+                image={el.image}
+                name={el.name}
+                category={el.category}
+                price={el.price}
+              />
+            );
+          })
+        ) : (
+          // Show loading placeholders if dataFilter is empty
+          loadingArrayFeature.map((el, index) => (
+            <CardFeature loading="Loading..." key={index + "allProduct"} />
+          ))
+        )}
       </div>
     </div>
   );
