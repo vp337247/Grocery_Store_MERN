@@ -1,4 +1,4 @@
-# Fullstack-Responsive-MERN-App-React-Redux-Nodejs-MongoDB-Express
+# Responsive-MERN-App-React-Redux-Nodejs-MongoDB-Express
 
 ->Backend Environment variables
 
@@ -8,7 +8,7 @@ FRONTEND_URL : "",
 
 ->Backend URL : https://grocery-backend-mern.onrender.com/
 
-->start 
+->To start 
 
 ## npm run dev 
 
@@ -21,6 +21,6 @@ REACT_APP_ADMIN_EMAIL = "",
 
 REACT_APP_STRIPE_PUBLIC_KEY  = "",
 
-->start
+->To start
 
 ## npm start
