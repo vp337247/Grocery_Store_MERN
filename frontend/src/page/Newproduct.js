@@ -49,8 +49,8 @@ const Newproduct = () => {
       });
 
       const fetchRes = await fetchData.json();
-      console.log(fetchRes);
-      toast(fetchRes.message);
+      
+      toast("Uploaded Successfully");
 
       // Clear form data after submission
       setData({
