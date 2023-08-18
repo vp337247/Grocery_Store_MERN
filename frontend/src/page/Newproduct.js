@@ -49,7 +49,7 @@ const Newproduct = () => {
       });
 
       const fetchRes = await fetchData.json();
-
+      console.log(fetchRes);
       toast(fetchRes.message);
 
       // Clear form data after submission
